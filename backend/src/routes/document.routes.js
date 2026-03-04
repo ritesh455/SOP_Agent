@@ -25,7 +25,7 @@ const upload = multer({
   }
 });
 
-// ✅ SINGLE, CORRECT ROUTE
+// SINGLE, CORRECT ROUTE
 router.post(
   "/upload",
   requireAuth,

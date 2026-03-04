@@ -14,7 +14,7 @@ const testSearch = async () => {
 
     const results = await searchSimilarChunks(queryEmbedding);
 
-    console.log("🔍 Search Results:");
+    console.log("Search Results:");
     results.forEach((r, i) => {
       console.log(`\nResult ${i + 1}`);
       console.log("Page:", r.page);
