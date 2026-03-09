@@ -1,10 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 const requireAuth = (req, res, next) => {
-  // 1️⃣ Try Authorization header
   let token = null;
-  console.log("AUTH USER:", req.user);
 
+  // 1️⃣ Try Authorization header
   if (req.headers.authorization) {
     token = req.headers.authorization.split(" ")[1];
   }
@@ -20,15 +19,20 @@ const requireAuth = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+
+    req.user = decoded;   // ✅ assign user
+
+    console.log("AUTH USER:", req.user);   // ✅ log AFTER assignment
+
     next();
+
   } catch (err) {
     return res.status(401).json({ message: "Invalid token" });
   }
 };
 
 const requireAdmin = (req, res, next) => {
-  if (req.user.role !== "admin") {
+  if (!req.user || req.user.role !== "admin") {   // ⭐ safer check
     return res.status(403).json({ message: "Admin access required" });
   }
   next();
