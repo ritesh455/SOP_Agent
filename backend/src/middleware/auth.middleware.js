@@ -3,12 +3,12 @@ const jwt = require("jsonwebtoken");
 const requireAuth = (req, res, next) => {
   let token = null;
 
-  // 1️⃣ Try Authorization header
+  // Try Authorization header
   if (req.headers.authorization) {
     token = req.headers.authorization.split(" ")[1];
   }
 
-  // 2️⃣ Fallback: token from query (for SSE)
+  // Fallback: token from query (for SSE)
   if (!token && req.query.token) {
     token = req.query.token;
   }
@@ -22,7 +22,7 @@ const requireAuth = (req, res, next) => {
 
     req.user = decoded;   // ✅ assign user
 
-    console.log("AUTH USER:", req.user);   // ✅ log AFTER assignment
+    console.log("AUTH USER:", req.user);  
 
     next();
 
@@ -32,7 +32,7 @@ const requireAuth = (req, res, next) => {
 };
 
 const requireAdmin = (req, res, next) => {
-  if (!req.user || req.user.role !== "admin") {   // ⭐ safer check
+  if (!req.user || req.user.role !== "admin") {   // safer check
     return res.status(403).json({ message: "Admin access required" });
   }
   next();
