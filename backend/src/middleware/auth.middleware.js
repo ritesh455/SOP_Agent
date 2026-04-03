@@ -20,7 +20,7 @@ const requireAuth = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = decoded;   // ✅ assign user
+    req.user = decoded;  
 
     console.log("AUTH USER:", req.user);  
 
@@ -32,7 +32,7 @@ const requireAuth = (req, res, next) => {
 };
 
 const requireAdmin = (req, res, next) => {
-  if (!req.user || req.user.role !== "admin") {   // safer check
+  if (!req.user || req.user.role !== "admin") { 
     return res.status(403).json({ message: "Admin access required" });
   }
   next();
