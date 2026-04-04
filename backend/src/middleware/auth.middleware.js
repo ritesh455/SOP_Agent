@@ -3,12 +3,10 @@ const jwt = require("jsonwebtoken");
 const requireAuth = (req, res, next) => {
   let token = null;
 
-  // Try Authorization header
   if (req.headers.authorization) {
     token = req.headers.authorization.split(" ")[1];
   }
 
-  // Fallback: token from query (for SSE)
   if (!token && req.query.token) {
     token = req.query.token;
   }
