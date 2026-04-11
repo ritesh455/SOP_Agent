@@ -15,7 +15,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/history", historyRoutes);
 app.use("/api/admin", require("./routes/admin.routes"));
 
-// Health check
 app.get("/health", (req, res) => {
   res.status(200).json({
     status: "OK",
