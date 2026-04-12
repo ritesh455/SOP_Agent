@@ -15,10 +15,17 @@ app.use("/api/auth", authRoutes);
 app.use("/api/history", historyRoutes);
 app.use("/api/admin", require("./routes/admin.routes"));
 
+// app.get("/health", (req, res) => {
+//   res.status(200).json({
+//     status: "OK",
+//     message: "OpsMind AI backend is running"
+//   });
+// });
+
 app.get("/health", (req, res) => {
   res.status(200).json({
     status: "OK",
-    message: "OpsMind AI backend is running"
+    message: "OpsMind AI backend running"
   });
 });
 
